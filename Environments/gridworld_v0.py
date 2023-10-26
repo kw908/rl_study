@@ -14,7 +14,7 @@ class environment():
       self.states = []
       for i in range(self.sidelength):
         for j in range(self.sidelength):
-            self.states.append(state([i,j],episodes))
+            self.states.append(state([i,j],episodes+1))
       
       self.terminal_states = [[0,0],[self.l,self.l]]
       
@@ -49,7 +49,7 @@ class environment():
     if state.alias in self.terminal_states:
        reward = 0
        next_state_value = 0
-       return next_state_alias, next_state_value, reward
+       return next_state_alias, next_state_value, reward 
 
     if action == "up":
         next_state_alias[0] -= 1
@@ -72,12 +72,12 @@ class environment():
                 next_state_alias = copy(state.alias)
                 next_state_value = copy(state.value[episode])
                 return next_state_alias, next_state_value, reward
-            else: 
-                reward = -1
-                i = self.pair_to_number(next_state_alias)
-                next_state_alias = self.states[i].alias
-                next_state_value = self.states[i].value[episode]
-                return next_state_alias, next_state_value, reward
+        
+        reward = -1
+        i = self.pair_to_number(next_state_alias)
+        next_state_alias = self.states[i].alias
+        next_state_value = self.states[i].value[episode]
+        return next_state_alias, next_state_value, reward
     
 
   def render(self):
