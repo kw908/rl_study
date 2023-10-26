@@ -6,14 +6,14 @@ import numpy as np
 from copy import copy
 
 class environment():
-  def __init__(self,sidelength,episode) -> None:
+  def __init__(self,sidelength,episodes) -> None:
     self.sidelength = sidelength
     self.l = sidelength-1
     self.actions = ["up","down","left","right"]
     self.states = []
     for i in range(self.sidelength):
        for j in range(self.sidelength):
-          self.states.append(state([i,j],episode))
+          self.states.append(state([i,j],episodes))
     
     self.terminal_states = [[0,0],[self.l,self.l]]
   
@@ -82,3 +82,6 @@ class state():
    def __init__(self,position:[int,int],episode:int) -> None:
       self.alias = position
       self.value = np.zeros(episode+1)
+      self.policy = {"up":[0.25,1.0,0.0], "down":[0.25,1.0,0.0], "left":[0.25,1.0,0.0], "right":[0.25,1.0,0.0]} 
+      #{action:[p(a), p(s',r|s,a)=1, q_value]
+
