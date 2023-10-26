@@ -3,20 +3,29 @@
 ## use tuples to denote states (grid positions)
 import math
 import numpy as np
+from PIL import Image, ImageDraw, ImageFont
 from copy import copy
 
 class environment():
   def __init__(self,sidelength,episodes) -> None:
-    self.sidelength = sidelength
-    self.l = sidelength-1
-    self.actions = ["up","down","left","right"]
-    self.states = []
-    for i in range(self.sidelength):
-       for j in range(self.sidelength):
-          self.states.append(state([i,j],episodes))
+      self.sidelength = sidelength
+      self.l = sidelength-1
+      self.actions = ["up","down","left","right"]
+      self.states = []
+      for i in range(self.sidelength):
+        for j in range(self.sidelength):
+            self.states.append(state([i,j],episodes))
+      
+      self.terminal_states = [[0,0],[self.l,self.l]]
+      
+      """For rendering"""
+      self.width, self.height = 200, 200  # Set the width and height of the image
+      self.cell_size = self.width // self.sidelength  # Calculate cell size for 4x4 grid
+      self.image = Image.new('RGB', (self.width, self.height), 'white')
+      self.draw = ImageDraw.Draw(self.image)
+      self.font = ImageFont.load_default()  # You can also specify a specific font if needed
     
-    self.terminal_states = [[0,0],[self.l,self.l]]
-  
+
   def number_to_pair(self,input:int): # convert from 1 to 14 notation to pair notation
      # input 1 to 14
      x = int(math.floor(input/self.sidelength))
@@ -72,7 +81,20 @@ class environment():
     
 
   def render(self):
-       pass
+      for i in range(self.sidelength):
+        for j in range(self.sidelength):
+            
+            num = self.pair_to_number([i,j])
+
+            cell_x, cell_y = i * self.cell_size, j * self.cell_size
+
+            cell_number = self.states[num].value[2]  # Calculate the number for the cell
+
+            self.draw.rectangle([cell_x, cell_y, cell_x + self.cell_size, cell_y + self.cell_size], outline='black')  # Draw cell border
+            text_width, text_height = self.draw.textsize(str(cell_number), self.font)  # Calculate text size
+            text_x = cell_x + (self.cell_size - text_width) // 2
+            text_y = cell_y + (self.cell_size - text_height) // 2
+      self.image.show()
 
 class agent():
    def __init__(self) -> None:
