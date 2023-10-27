@@ -81,19 +81,30 @@ class environment():
     
 
   def render(self):
-      for i in range(self.sidelength):
-        for j in range(self.sidelength):
-            
-            num = self.pair_to_number([i,j])
-
+      for i in range(self.sidelength): # column
+        for j in range(self.sidelength): # row
+            action_str = []
             cell_x, cell_y = i * self.cell_size, j * self.cell_size
-
-            cell_number = self.states[num].value[2]  # Calculate the number for the cell
-
+            
+            cell_number = self.pair_to_number([j,i])
+            
             self.draw.rectangle([cell_x, cell_y, cell_x + self.cell_size, cell_y + self.cell_size], outline='black')  # Draw cell border
             text_width, text_height = self.draw.textsize(str(cell_number), self.font)  # Calculate text size
             text_x = cell_x + (self.cell_size - text_width) // 2
             text_y = cell_y + (self.cell_size - text_height) // 2
+            # text_y -= 3
+            
+            if [j,i] in self.terminal_states:
+               self.draw.multiline_text((text_x-3, text_y), "term", font=self.font, fill=(0, 0, 0))
+            else:
+                for a in ["up","down","left","right"]:
+                    if self.states[cell_number].policy[a][0] != 0:
+                        self.draw.multiline_text((text_x-3, text_y), a, font=self.font, fill=(0, 0, 0))
+                        text_y+=text_height
+                    
+            
+
+                # self.draw.text((text_x, text_y), a, fill='black', font=self.font)
       self.image.show()
 
 class agent():
