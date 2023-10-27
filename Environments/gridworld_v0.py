@@ -24,6 +24,10 @@ class environment():
       self.image = Image.new('RGB', (self.width, self.height), 'white')
       self.draw = ImageDraw.Draw(self.image)
       self.font = ImageFont.load_default()  # You can also specify a specific font if needed
+      self.arrows = {"up":"\u2191",
+                    "down":"\u2193",
+                    "right":"\u2192",
+                    "left":"\u2190"}
     
 
   def number_to_pair(self,input:int): # convert from 1 to 14 notation to pair notation
@@ -49,7 +53,7 @@ class environment():
     if state.alias in self.terminal_states:
        reward = 0
        next_state_value = 0
-       return next_state_alias, next_state_value, reward 
+       return next_state_value, reward 
 
     if action == "up":
         next_state_alias[0] -= 1
@@ -63,7 +67,7 @@ class environment():
     if next_state_alias in self.terminal_states:
       reward = -1 
       next_state_value = 0
-      return next_state_alias, next_state_value, reward
+      return next_state_value, reward
     
     else:
         for pos in next_state_alias:
@@ -71,19 +75,18 @@ class environment():
                 reward = -1
                 next_state_alias = copy(state.alias)
                 next_state_value = copy(state.value[episode])
-                return next_state_alias, next_state_value, reward
+                return next_state_value, reward
         
         reward = -1
         i = self.pair_to_number(next_state_alias)
         next_state_alias = self.states[i].alias
         next_state_value = self.states[i].value[episode]
-        return next_state_alias, next_state_value, reward
+        return next_state_value, reward
     
 
   def render(self):
       for i in range(self.sidelength): # column
         for j in range(self.sidelength): # row
-            action_str = []
             cell_x, cell_y = i * self.cell_size, j * self.cell_size
             
             cell_number = self.pair_to_number([j,i])
