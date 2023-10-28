@@ -22,10 +22,12 @@ class environment():
         
         self.dealer_cards = []
         self.player_cards = []
+        self.reward = 0
 
     def reset(self):
         self.dealer_cards = []
         self.player_cards = []
+        self.reward = 0
 
     def hits(self): #draw a card
         random.seed()
@@ -36,10 +38,22 @@ class environment():
     def dealer(self):
         s = sum(self.dealer_cards)
         if s>=17: 
-            return s, "sticks"
+            return "sticks"
         else:
             self.dealer_cards.append(self.hits())
             return "hits"
+    
+    def agent(self): #player with policy
+        s = sum(self.dealer_cards)
+        if s>=20: 
+            return "sticks"
+        else:
+            self.dealer_cards.append(self.hits())
+            return "hits"
+    
+    def game(self):
+       pass
+
 
     def render(self):
         pass
