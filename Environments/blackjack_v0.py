@@ -24,7 +24,7 @@ class environment():
         self.dealer_cards = []
         self.player_cards = []
 
-        self.step = 0
+        self.rewards = []
 
         r = [-1, 0, 1]
         dealer_showing = [1,2,3,4,5,6,7,8,9,10]
@@ -34,6 +34,7 @@ class environment():
     def reset(self):
         self.dealer_cards = []
         self.player_cards = []
+        self.rewards = []
 
     def hits(self): #draw a card
         random.seed()
@@ -55,6 +56,7 @@ class environment():
         s = sum(self.player_cards)
         while (s<20):
             self.player_cards.append(self.hits())
+            self.rewards.append(0) #in-game reward is 0
             if self.player_cards.count(1) == 1:
                 self.check_usable()
             s = sum(self.player_cards)
@@ -80,34 +82,34 @@ class environment():
             
         if sum(self.player_cards) == 21: #natural
             if sum(self.dealer_cards) == 21:
-                reward = 0 
-                return reward
+                term_reward = 0 
+                return term_reward
             else:
-                reward = 1 #player won
-                return reward
+                term_reward = 1 #player won
+                return term_reward
 
         #keep going if no results
         result = self.agent()
         if result == "sticks":
             pass
         elif result == "busted": #player lost
-            reward = -1
-            return reward
+            term_reward = -1
+            return term_reward
         
         result = self.dealer()
         if result == "sticks":
             pass
         elif result == "busted": #player won
-            reward = 1
-            return reward
+            term_reward = 1
+            return term_reward
         
         if sum(self.player_cards)>sum(self.dealer_cards):
-            reward = 1
+            term_reward = 1
         elif sum(self.player_cards)<sum(self.dealer_cards):
-            reward = -1
-        else: reward = 0 #tie
+            term_reward = -1
+        else: term_reward = 0 #tie
 
-        return reward
+        return term_reward
 
     def render(self):
         pass
