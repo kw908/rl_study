@@ -28,11 +28,14 @@ class environment():
         self.rewards_in_episode = []
         self.is_usable = False
 
-        r = [-1, 0, 1]
         dealer_showing = [1,2,3,4,5,6,7,8,9,10]
         player_sum = [12,13,14,15,16,17,18,19,20,21]
-        all_states = list(iter.product(r, dealer_showing, player_sum)) #200 states total
+        usable = [True, False]
+    
+        all_states = list(iter.product(player_sum, dealer_showing, usable)) #200 states total
         
+        print(all_states)
+
         self.states = {}
         for s in all_states:
             self.states.update({s:[0,[]]}) #initialize values and returns for all states
@@ -47,9 +50,8 @@ class environment():
 
     def hits(self): #draw a card
         random.seed()
-        i = random.randint((1,52))
-        self.step+=1
-        return self.deck[i]
+        i = random.randint(1,52)
+        return self.deck[i-1]
 
     
     def dealer(self):
@@ -63,19 +65,22 @@ class environment():
     
     def agent(self): #player with policy
         s = sum(self.player_cards)
-        self.states_in_episode.append((s,self.dealer_cards[0],self.is_usable)) #S_0
+        self.states_in_episode.append((s,self.dealer_cards[0],self.is_usable)) #S_0 assume 0th dealer card shown
+        self.rewards_in_episode.append(0)
         while (s<20): #the policy to evaluate
             self.player_cards.append(self.hits())
-            self.rewards_in_episode.append(0) #in-game reward is 0 
+            self.rewards_in_episode.append(0) #in-game reward is 0
             if self.player_cards.count(1) == 1:
                 self.check_usable()
             s = sum(self.player_cards)
-            self.states_in_episode.append((s, self.dealer_cards[0], self.is_usable)) #S_1...S_T-1
+
             if s>21: return "busted"
+            self.states_in_episode.append((s, self.dealer_cards[0], self.is_usable)) #S_1...S_T-1
+            
         return "sticks"
     
     def check_usable(self):
-        i = self.player_cards.index(1,0,2) 
+        i = self.player_cards.index(1) 
         self.player_cards[i] = 11
         if sum(self.player_cards) >21:
             self.player_cards[i] = 1
@@ -89,6 +94,9 @@ class environment():
         self.dealer_cards.append(self.hits())
         self.player_cards.append(self.hits())
         self.player_cards.append(self.hits())
+
+        while(sum(self.player_cards)<12):
+           self.player_cards.append(self.hits())
 
         if self.player_cards.count(1) == 1:
             self.check_usable()
