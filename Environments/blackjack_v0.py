@@ -1,4 +1,4 @@
-## Black jack for Monte Carlo approach ##
+## Black jack for Monte Carlo approach，in book example 5.1 ##
 
 import math
 import numpy as np
@@ -24,17 +24,26 @@ class environment():
         self.dealer_cards = []
         self.player_cards = []
 
-        self.rewards = []
+        self.states_in_episode = []
+        self.rewards_in_episode = []
+        self.is_usable = False
 
         r = [-1, 0, 1]
         dealer_showing = [1,2,3,4,5,6,7,8,9,10]
         player_sum = [12,13,14,15,16,17,18,19,20,21]
-        self.states = list(iter.product(r, dealer_showing, player_sum)) #200 states total
+        all_states = list(iter.product(r, dealer_showing, player_sum)) #200 states total
+        
+        self.states = {}
+        for s in all_states:
+            self.states.update({s:[0,[]]}) #initialize values and returns for all states
+
+        self.returns = []
 
     def reset(self):
-        self.dealer_cards = []
-        self.player_cards = []
-        self.rewards = []
+        self.dealer_cards.clear()
+        self.player_cards.clear()
+        self.rewards_in_episode.clear()
+        self.states_in_episode.clear()
 
     def hits(self): #draw a card
         random.seed()
@@ -54,12 +63,14 @@ class environment():
     
     def agent(self): #player with policy
         s = sum(self.player_cards)
-        while (s<20):
+        self.states_in_episode.append((s,self.dealer_cards[0],self.is_usable)) #S_0
+        while (s<20): #the policy to evaluate
             self.player_cards.append(self.hits())
-            self.rewards.append(0) #in-game reward is 0
+            self.rewards_in_episode.append(0) #in-game reward is 0 
             if self.player_cards.count(1) == 1:
                 self.check_usable()
             s = sum(self.player_cards)
+            self.states_in_episode.append((s, self.dealer_cards[0], self.is_usable)) #S_1...S_T-1
             if s>21: return "busted"
         return "sticks"
     
@@ -68,6 +79,8 @@ class environment():
         self.player_cards[i] = 11
         if sum(self.player_cards) >21:
             self.player_cards[i] = 1
+            self.is_usable = False
+        else: self.is_usable = True
             
 
     def game(self): #one game is one episode
@@ -83,6 +96,7 @@ class environment():
         if sum(self.player_cards) == 21: #natural
             if sum(self.dealer_cards) == 21:
                 term_reward = 0 
+                self.rewards_in_episode[-1] = term_reward
                 return term_reward
             else:
                 term_reward = 1 #player won
@@ -94,6 +108,7 @@ class environment():
             pass
         elif result == "busted": #player lost
             term_reward = -1
+            self.rewards_in_episode[-1] = term_reward
             return term_reward
         
         result = self.dealer()
@@ -101,6 +116,7 @@ class environment():
             pass
         elif result == "busted": #player won
             term_reward = 1
+            self.rewards_in_episode[-1] = term_reward
             return term_reward
         
         if sum(self.player_cards)>sum(self.dealer_cards):
@@ -108,7 +124,8 @@ class environment():
         elif sum(self.player_cards)<sum(self.dealer_cards):
             term_reward = -1
         else: term_reward = 0 #tie
-
+        
+        self.rewards_in_episode[-1] = term_reward
         return term_reward
 
     def render(self):
