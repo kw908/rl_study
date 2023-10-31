@@ -34,8 +34,6 @@ class environment():
     
         all_states = list(iter.product(player_sum, dealer_showing, usable)) #200 states total
         
-        print(all_states)
-
         self.states = {}
         for s in all_states:
             self.states.update({s:[0,[]]}) #initialize values and returns for all states
@@ -70,13 +68,12 @@ class environment():
         while (s<20): #the policy to evaluate
             self.player_cards.append(self.hits())
             self.rewards_in_episode.append(0) #in-game reward is 0
-            if self.player_cards.count(1) == 1:
-                self.check_usable()
+
             s = sum(self.player_cards)
 
             if s>21: return "busted"
             self.states_in_episode.append((s, self.dealer_cards[0], self.is_usable)) #S_1...S_T-1
-            
+
         return "sticks"
     
     def check_usable(self):
@@ -97,9 +94,10 @@ class environment():
 
         while(sum(self.player_cards)<12):
            self.player_cards.append(self.hits())
+           if self.player_cards.count(1) >= 1:
+                self.check_usable()
 
-        if self.player_cards.count(1) == 1:
-            self.check_usable()
+
             
         if sum(self.player_cards) == 21: #natural
             if sum(self.dealer_cards) == 21:
@@ -137,7 +135,12 @@ class environment():
         return term_reward
 
     def render(self):
-        pass
+        ax = plt.figure().add_subplot(projection='3d')
+        X, Y, Z = axes3d.get_test_data(0.05)
+
+        # Plot the 3D surface
+        ax.plot_surface(X, Y, Z, edgecolor='royalblue', lw=0.5, rstride=8, cstride=8,
+                        alpha=0.3)
     
             
 
