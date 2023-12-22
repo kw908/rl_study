@@ -29,7 +29,7 @@ class DeepQNetwork(nn.Module):
 
 class Agent():
     def __init__(self, gamma, epsilon, lr, input_dims, batch_size, n_actions,
-                 max_mem_size=100000, eps_end=0.01, eps_dec=5e-4):
+                 max_mem_size=300000, eps_end=0.01, eps_dec=5e-4):
         self.gamma = gamma
         self.epsilon = epsilon
         self.eps_min = eps_end
@@ -39,6 +39,8 @@ class Agent():
         self.mem_size = max_mem_size
         self.batch_size = batch_size
         self.meme_cntr = 0
+        self.loss_memory_in_eps = []
+        self.loss_memory = []
 
         self.Q_eval = DeepQNetwork(self.lr, n_actions=n_actions, 
                                    input_dims=input_dims, fc1_dims=256, fc2_dims=256)
@@ -64,7 +66,11 @@ class Agent():
     def choose_action(self, observation):
         if np.random.random()>self.epsilon: #epsilon-greedy
             state = T.tensor([observation]).to(self.Q_eval.device)
-            actions = self.Q_eval.forward(state)
+            
+            """Action is taken based on the updated value function (forward propagation throught nn),"""
+            """but the policy is still epsilon-greedy (q-learning is off-policy learning)."""
+
+            actions = self.Q_eval.forward(state)  
             action = T.argmax(actions).item()
         else:
             action = np.random.choice(self.action_space)
@@ -103,9 +109,14 @@ class Agent():
 
         """tensor uses both positive and negative indices to index the dimensions of array, works the same way as ndarray indexing"""
 
+        """doing gradient descent below"""
+
         loss = self.Q_eval.loss(q_target, q_eval).to(self.Q_eval.device)
+        self.loss_memory_in_eps.append(np.mean(loss.detach().numpy()))
         loss.backward()
         self.Q_eval.optimizer.step()
+        
+        """decrease epsilon (the video did this)"""
 
         self.epsilon = self.epsilon - self.eps_dec if self.epsilon > self.eps_min \
                        else self.eps_min
