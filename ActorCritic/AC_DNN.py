@@ -5,7 +5,7 @@ import numpy as np
 
 class ActorNN(nn.Module):
     def __init__(self, input_dims, n_actions, fc1_dims, fc2_dims, lr):
-        # Input state space, output policy (dim = dim of action space)
+        """Input current state (for cartpole it's dimension 4), output policy (dim = dim of action space)"""
         super(ActorNN, self).__init__()
         self.input_dims = input_dims
         self.fc1_dims = fc1_dims #fc stands for fully connected layer, also known as "linear layer"
@@ -23,7 +23,7 @@ class ActorNN(nn.Module):
 
         
 class CriticNN(nn.Module):
-    # Input state space, output value of the current state (dim=1)
+    """Same as actor, input current state (for cartpole it's dimension 4), while output is the value of the current state (dim=1)"""
     def __init__(self, input_dims, fc1_dims, fc2_dims, lr):
         # input_dims is the dimension of the state space
         super(CriticNN, self).__init__()
