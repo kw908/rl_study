@@ -78,7 +78,7 @@ class Agent:
             action_probs = tfp.distributions.Categorical(probs=probs)
             log_prob = action_probs.log_prob(self.action)
 
-            delta = reward + self.gamma*state_value_(1-int(done))
+            delta = reward + self.gamma*state_value_*(1-int(done))
             actor_loss = -log_prob*delta
             critic_loss = delta**2
 
@@ -87,5 +87,5 @@ class Agent:
         gradient = tape.gradient(total_loss, self.actor_critic.trainable_variables)
         self.actor_critic.optimizer.apply_gradients(zip(gradient, 
                                                         self.actor_critic.trainable_variables))  
-        
-              
+
+
