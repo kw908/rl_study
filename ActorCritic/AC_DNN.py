@@ -12,7 +12,7 @@ class ActorNN(nn.Module):
         self.fc2_dims = fc2_dims
         self.n_actions = n_actions
 
-        self.fc1 = nn.Linear(*self.input_dims, self.fc1_dims) # aristerisk means any number of dimensions
+        self.fc1 = nn.Linear(self.input_dims, self.fc1_dims) # aristerisk means any number of dimensions
         self.relu = nn.ReLU()
         self.fc2 = nn.Linear(self.fc1_dims,self.fc2_dims)
         self.fc3 = nn.Linear(self.fc2_dims, self.n_actions)
@@ -31,7 +31,7 @@ class CriticNN(nn.Module):
         self.fc1_dims = fc1_dims #fc stands for fully connected layer, also known as "linear layer"
         self.fc2_dims = fc2_dims
 
-        self.fc1 = nn.Linear(*self.input_dims, self.fc1_dims) # aristerisk means any number of dimensions
+        self.fc1 = nn.Linear(self.input_dims, self.fc1_dims) # aristerisk means any number of dimensions
         self.relu = nn.ReLU()
         self.fc2 = nn.Linear(self.fc1_dims,self.fc2_dims)
         self.fc3 = nn.Linear(self.fc2_dims, 1)
