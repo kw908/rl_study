@@ -1,2 +1,2 @@
-# RL_doorkick
+# RL Study
 Practicing fundamentals of RL
