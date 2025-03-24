@@ -2,7 +2,7 @@
 
 # PPO Hyperparameters
 steps_per_epoch: 4000
-epochs: 60
+epochs: 30
 gamma: 0.99
 clip_ratio: 0.2
 policy_learning_rate: 3e-4

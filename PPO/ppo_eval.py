@@ -55,8 +55,10 @@ def get_action(observation):
 obs, _ = env.reset()
 done = False
 episode_return = 0
+step = 0
+max_steps = 1000
 
-while not done:
+while not done and step < max_steps:
     frame = env.render()
     frames.append(frame)
 
@@ -64,11 +66,12 @@ while not done:
     action = get_action(obs_tensor).numpy()[0]
     obs, reward, done, _, _ = env.step(action)
     episode_return += reward
+    step+=1
 
 env.close()
 print(f"Episode finished. Total return: {episode_return}")
 
 # === Save as GIF ===
-output_path = "ppo_eval_episode.gif"
+output_path = "ppo_eval_episode_2.gif"
 imageio.mimsave(output_path, frames, fps=30)
 print(f"Saved episode to: {output_path}")
