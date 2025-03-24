@@ -1,0 +1,302 @@
+[
+    {
+        "epoch": 1,
+        "mean_return": 27.027027027027028,
+        "mean_length": 27.027027027027028
+    },
+    {
+        "epoch": 2,
+        "mean_return": 33.333333333333336,
+        "mean_length": 33.333333333333336
+    },
+    {
+        "epoch": 3,
+        "mean_return": 51.282051282051285,
+        "mean_length": 51.282051282051285
+    },
+    {
+        "epoch": 4,
+        "mean_return": 74.07407407407408,
+        "mean_length": 74.07407407407408
+    },
+    {
+        "epoch": 5,
+        "mean_return": 111.11111111111111,
+        "mean_length": 111.11111111111111
+    },
+    {
+        "epoch": 6,
+        "mean_return": 153.84615384615384,
+        "mean_length": 153.84615384615384
+    },
+    {
+        "epoch": 7,
+        "mean_return": 222.22222222222223,
+        "mean_length": 222.22222222222223
+    },
+    {
+        "epoch": 8,
+        "mean_return": 210.52631578947367,
+        "mean_length": 210.52631578947367
+    },
+    {
+        "epoch": 9,
+        "mean_return": 250.0,
+        "mean_length": 250.0
+    },
+    {
+        "epoch": 10,
+        "mean_return": 210.52631578947367,
+        "mean_length": 210.52631578947367
+    },
+    {
+        "epoch": 11,
+        "mean_return": 285.7142857142857,
+        "mean_length": 285.7142857142857
+    },
+    {
+        "epoch": 12,
+        "mean_return": 333.3333333333333,
+        "mean_length": 333.3333333333333
+    },
+    {
+        "epoch": 13,
+        "mean_return": 363.6363636363636,
+        "mean_length": 363.6363636363636
+    },
+    {
+        "epoch": 14,
+        "mean_return": 500.0,
+        "mean_length": 500.0
+    },
+    {
+        "epoch": 15,
+        "mean_return": 307.6923076923077,
+        "mean_length": 307.6923076923077
+    },
+    {
+        "epoch": 16,
+        "mean_return": 333.3333333333333,
+        "mean_length": 333.3333333333333
+    },
+    {
+        "epoch": 17,
+        "mean_return": 444.44444444444446,
+        "mean_length": 444.44444444444446
+    },
+    {
+        "epoch": 18,
+        "mean_return": 666.6666666666666,
+        "mean_length": 666.6666666666666
+    },
+    {
+        "epoch": 19,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 20,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 21,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 22,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 23,
+        "mean_return": 1333.3333333333333,
+        "mean_length": 1333.3333333333333
+    },
+    {
+        "epoch": 24,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 25,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 26,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 27,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 28,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 29,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 30,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 31,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 32,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 33,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 34,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 35,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 36,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 37,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 38,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 39,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 40,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 41,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 42,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 43,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 44,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 45,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 46,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 47,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 48,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 49,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 50,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 51,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 52,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 53,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 54,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 55,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 56,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 57,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 58,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 59,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    },
+    {
+        "epoch": 60,
+        "mean_return": 4000.0,
+        "mean_length": 4000.0
+    }
+]
